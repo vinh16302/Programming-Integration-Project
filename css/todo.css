@@ -54,6 +54,10 @@ noteList {
     background-color: #ffffff;
 }
 
+notelist::-webkit-scrollbar {
+    display: none;
+}
+
 .within-list {
     cursor: pointer;
 }
@@ -154,6 +158,10 @@ button:hover,
 
 #listed:nth-child(odd):hover {
     cursor: pointer;
+}
+
+.listed-container::-webkit-scrollbar {
+    display: none;
 }
 
 #btn-save {

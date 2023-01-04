@@ -1,3 +1,11 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const items = { ...localStorage };
+    /*for (let i = 1; i <= localStorage.length; i++)
+    {
+        alert(items[i]);
+    };*/
+});
+
 $(document).ready(function () {
 
     var noteCount = 0;
@@ -12,31 +20,21 @@ $(document).ready(function () {
 
     $('#btn-save').click(function () {
         var title = $('#title-field').val();
-        var body = $('#body-field').val();
-        if (title === '' && body === '') {
-            alert('Please add a title or body to your note.');
+        var due = $('#body-field').val();
+        var body = new Date(due);
+        if (title == '') {
+            alert('Please add a title for your task');
             return;
         }
-        var created = new Date();
         var color = $('notepad').css('background-color');
         var id = noteCount + 1;
-        if (activeNote) {
-            $('#' + activeNote)[0].children[0].innerHTML = title;
-            $('#' + activeNote)[0].children[1].innerHTML = created.toLocaleString("en-US");
-            $('#' + activeNote)[0].children[2].innerHTML = body;
-            $('#' + activeNote)[0].style.backgroundColor = color;
-            activeNote = null;
-            $('#edit-mode').removeClass('display').addClass('no-display');
-        } else {
-            var created = new Date();
-            $('#listed').append('<div id="note' + id + '" style="background-color: ' + color + '"><div class="list-title">' + title + '</div> <div class="list-date">' + created.toLocaleString("en-US") + '</div> <div class="list-text">' + body + '</div> </div>');
-            noteCount++;
-        };
+        $('#listed').append('<div id="note' + id + '" style="background-color: ' + color + '"><div class="list-title">' + title + '</div> <div class="list-text">' + "Due at: " + body.toLocaleString("en-US") + '</div> </div>');
+        noteCount++;
+        var checked = 0;
+        var todo = [title, body, checked, color];
+        localStorage.setItem(id, JSON.stringify(todo));
         $('#title-field').val('');
         $('#body-field').val('');
-        $('notepad').css('background-color', 'white');
-        $('#title-field').css('background-color', 'white');
-        $('#body-field').css('background-color', 'white');
     });
 
     $('#btn-delete').click(function () {
@@ -53,17 +51,10 @@ $(document).ready(function () {
     });
 
     $('#listed').click(function (e) {
-        var id = e.target.parentElement.id;
-        var color = e.target.parentElement.style.backgroundColor;
-        activeNote = id;
-        $('#edit-mode').removeClass('no-display').addClass('display');
-        var titleSel = $('#' + id)[0].children[0].innerHTML;
-        var bodySel = $('#' + id)[0].children[2].innerHTML;
-        $('#title-field').val(titleSel);
-        $('#body-field').val(bodySel);
-        $('notepad').css('background-color', color);
-        $('#title-field').css('background-color', color);
-        $('#body-field').css('background-color', color);
+        if (e.target.parentElement.style.textDecoration != "line-through")
+            e.target.parentElement.style.textDecoration = "line-through";
+        else
+            e.target.parentElement.style.textDecoration = "none";
     })
 
 })
