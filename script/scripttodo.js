@@ -1,9 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const items = { ...localStorage };
-    /*for (let i = 1; i <= localStorage.length; i++)
+    var todo;
+    var date;
+    for (let i = 1; i <= localStorage.length; i++)
     {
-        alert(items[i]);
-    };*/
+        todo = JSON.parse(localStorage.getItem(i));
+        date = new Date(todo[1]);
+        $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '</div> <div class="list-text">' + "Due at: " + date.toLocaleString("en-US") + '</div> </div>');
+    };
 });
 
 $(document).ready(function () {
