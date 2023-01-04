@@ -1,15 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
     var todo;
     var date;
-    for (let i = 1; i <= localStorage.length; i++)
+    for (let l = 0; l < localStorage.length; l++)
     {
+        var i = localStorage.key(l);
+        if (localStorage.getItem(i) == null)
+            continue;
         todo = JSON.parse(localStorage.getItem(i));
         date = new Date(todo[1]);
-        $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '</div> <div class="list-text">' + "Due at: " + date.toLocaleString("en-US") + '</div> </div>');
+        $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '<button class="trash-button" onclick="deleteTodo()"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + date.toLocaleString("en-US") + '</div> </div>');
         if (todo[2])
             document.getElementById("note" + i).style.textDecoration = "line-through";
     };
 });
+
 
 $(document).ready(function () {
 
@@ -32,8 +36,13 @@ $(document).ready(function () {
             return;
         }
         var color = $('notepad').css('background-color');
-        var id = noteCount + 1;
-        $('#listed').append('<div id="note' + id + '" style="background-color: ' + color + '"><div class="list-title">' + title + '</div> <div class="list-text">' + "Due at: " + body.toLocaleString("en-US") + '</div> </div>');
+        var id = 1;
+        for (let i = 0; i < localStorage.length; i++)
+        {
+            if (localStorage.key(i) >= id)
+                id = JSON.parse(localStorage.key(i)) + 1;
+        };
+        $('#listed').append('<div id="note' + id + '" style="background-color: ' + color + '"><div class="list-title">' + title + '<button class="trash-button" onclick="deleteTodo()"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + body.toLocaleString("en-US") + '</div> </div>');
         noteCount++;
         var checked = 0;
         var todo = [title, body, checked, color];

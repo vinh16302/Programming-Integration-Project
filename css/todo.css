@@ -195,3 +195,17 @@ button:hover,
 .pink {
     background-color: #ffd8ef;
 }
+
+.trash-button{
+    float: right;
+    background: none;
+    color: inherit;
+    border: none;
+    font-weight: normal;
+    font-size: 13px;
+    padding: 8px;
+    margin: 0;
+}
+.trash-button:hover{
+    background-color: #bac9e0;
+}
