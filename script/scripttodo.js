@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
         todo = JSON.parse(localStorage.getItem(i));
         date = new Date(todo[1]);
         $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '</div> <div class="list-text">' + "Due at: " + date.toLocaleString("en-US") + '</div> </div>');
+        if (todo[2])
+            document.getElementById("note" + i).style.textDecoration = "line-through";
     };
 });
 
@@ -54,10 +56,18 @@ $(document).ready(function () {
     });
 
     $('#listed').click(function (e) {
-        if (e.target.parentElement.style.textDecoration != "line-through")
+        if (e.target.parentElement.style.textDecoration != "line-through") {
             e.target.parentElement.style.textDecoration = "line-through";
-        else
+            var temp = JSON.parse(localStorage.getItem(e.target.parentElement.id[4]));
+            temp[2] = 1;
+            localStorage.setItem(e.target.parentElement.id[4], JSON.stringify(temp));
+        }
+        else {
             e.target.parentElement.style.textDecoration = "none";
+            var temp = JSON.parse(localStorage.getItem(e.target.parentElement.id[4]));
+            temp[2] = 0;
+            localStorage.setItem(e.target.parentElement.id[4], JSON.stringify(temp));
+        }
     })
 
 })
