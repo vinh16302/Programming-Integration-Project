@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 $(document).ready(function () {
 
-    var noteCount = 0;
+    var noteCount = localStorage.length;
     var activeNote = null;
 
     $('.color-box').click(function () {
