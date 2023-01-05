@@ -1,3 +1,48 @@
+setInterval(function () {
+    var currentdate = new Date();
+    var item;
+    var due;
+    for (let i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        item = JSON.parse(localStorage.getItem(key));
+        if (document.getElementById("remaining" + key)) {
+            if (item[1] == null)
+                continue;
+            else {
+                due = new Date(item[1]);
+                var span = document.getElementById("remaining" + key);
+                var remaining = new Date(due - currentdate);
+                if (remaining <= 3600000 && remaining > 0 && item[2] != 1) {
+                    span.textContent = remaining.getMinutes() + " minute(s), " + remaining.getSeconds() + " second(s) left.";
+                }
+            }
+        }
+    }
+}, 500);
+
+setInterval(function () {
+    var currentdate = new Date();
+    var item;
+    var due;
+    for (let i = 0; i < localStorage.length; i++)
+    {
+        var key = localStorage.key(i);
+        item = JSON.parse(localStorage.getItem(key));
+        if (item[1] == null)
+            continue;
+        else {
+            due = new Date(item[1]);
+            var remaining = new Date(due - currentdate);
+            if (remaining <= 3600000 && remaining > 0 && item[2] != 1) {
+                var checkexist = document.getElementById("remaining" + key);
+                if (!checkexist)
+                    $('#notification').append('<div class="alert alert-info alert-dismissible fade show" role="alert"><i class= "fa-solid fa-circle-info"></i><strong class="alertTitle"> ' + item[0] + ' </strong> <br> Due at: ' + due.toLocaleString("en-US") + '<br> <span id="remaining' + key + '">' + remaining.getMinutes() + " minute(s), " + remaining.getSeconds() + " second(s) left." + '</span><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="margin: auto; padding: 15px;"></button></div>');
+            }
+        }
+    };
+}, 10000);
+
+
 function deleteTodo(e)
 {
     document.getElementById(e.id).style.display = "none";
@@ -16,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         todo = JSON.parse(localStorage.getItem(i));
         if (todo[1] != null) {
             date = new Date(todo[1]);
-            $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '<button class="trash-button" onclick="deleteTodo(this.parentElement.parentElement)"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + date.toLocaleString("en-US") + '</div> </div>');
+            $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '<button class="trash-button" onclick="deleteTodo(this.parentElement.parentElement)"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + date.toLocaleString("en-US")   + '</div> </div>');
         }
         else
         {

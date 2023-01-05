@@ -40,6 +40,8 @@ footer {
     margin-left: 5%;
     display: inline-block;
     text-align: center;
+    position: fixed;
+    top: 120px;
 }
 
 noteList {
@@ -47,7 +49,7 @@ noteList {
     display: inline-block;
     margin-left: 2.5%;
     width: 30.5%;
-    height: 400px;
+    height: 800px;
     overflow: scroll;
     border: solid 3px #272727;
     border-radius: 5px;
@@ -81,14 +83,20 @@ notelist::-webkit-scrollbar {
 }
 
 notePad {
+    position: fixed;
+    top: 150px;
     display: inline-block;
     border: solid 3px black;
     border-radius: 10px;
-    height: 400px;
-    overflow: scroll;
     width: 60%;
     margin-left: 5%;
     margin-top: 0;
+}
+
+.buttons{
+    position: fixed;
+    top: 230px;
+    right: 30px;
 }
 
 #note-title {
@@ -117,7 +125,6 @@ notePad {
 #body-field {
     font-size: 14px;
     font-weight: 500;
-    height: 400px;
 }
 
 #color-select {
@@ -208,4 +215,15 @@ button:hover,
 }
 .trash-button:hover{
     background-color: #bac9e0;
+}
+
+#notification {
+    margin: 25px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
+.alertTitle{
+    font-size:larger;
 }
