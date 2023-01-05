@@ -28,7 +28,7 @@ step 6: Copy the "Programming-Integration-Project-main" folder and move it insid
 
 //If you're a Mac user, it should be in application/xampp/htdocs
 
-Step 7: Open a web browser and type "localhost/Programming-Integration-Project-main/index.php"
+Step 7: Open a web browser and type "localhost/Programming-Integration-Project-main/NoteApp/index.php"
 
 
 ------------ FOR THE TODO APP --------------
