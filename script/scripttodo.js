@@ -1,3 +1,10 @@
+function deleteTodo(e)
+{
+    document.getElementById(e.id).style.display = "none";
+    localStorage.removeItem(e.id[4]);
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
     var todo;
     var date;
@@ -8,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
             continue;
         todo = JSON.parse(localStorage.getItem(i));
         date = new Date(todo[1]);
-        $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '<button class="trash-button" onclick="deleteTodo()"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + date.toLocaleString("en-US") + '</div> </div>');
+        $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '<button class="trash-button" onclick="deleteTodo(this.parentElement.parentElement)"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + date.toLocaleString("en-US") + '</div> </div>');
         if (todo[2])
             document.getElementById("note" + i).style.textDecoration = "line-through";
     };
@@ -52,16 +59,8 @@ $(document).ready(function () {
     });
 
     $('#btn-delete').click(function () {
-        if (activeNote) {
-            $('#' + activeNote)[0].remove();
-            activeNote = null;
-            $('#edit-mode').removeClass('display').addClass('no-display');
-        }
         $('#title-field').val('');
         $('#body-field').val('');
-        $('notepad').css('background-color', 'white');
-        $('#title-field').css('background-color', 'white');
-        $('#body-field').css('background-color', 'white');
     });
 
     $('#listed').click(function (e) {
