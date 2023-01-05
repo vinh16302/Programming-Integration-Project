@@ -30,6 +30,7 @@ step 6: Copy the "Programming-Integration-Project-main" folder and move it insid
 
 Step 7: Open a web browser and type "localhost/Programming-Integration-Project-main/NoteApp/index.php"
 
+Step 8: Login by using email "khanh@gmail.com" and password "123".
 
 ------------ FOR THE TODO APP --------------
 
