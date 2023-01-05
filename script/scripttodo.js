@@ -14,8 +14,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (localStorage.getItem(i) == null)
             continue;
         todo = JSON.parse(localStorage.getItem(i));
-        date = new Date(todo[1]);
-        $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '<button class="trash-button" onclick="deleteTodo(this.parentElement.parentElement)"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + date.toLocaleString("en-US") + '</div> </div>');
+        if (todo[1] != null) {
+            date = new Date(todo[1]);
+            $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '<button class="trash-button" onclick="deleteTodo(this.parentElement.parentElement)"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + date.toLocaleString("en-US") + '</div> </div>');
+        }
+        else
+        {
+            $('#listed').append('<div id="note' + i + '" style="background-color: ' + todo[3] + '"><div class="list-title">' + todo[0] + '<button class="trash-button" onclick="deleteTodo(this.parentElement.parentElement)"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "No due date" + '</div> </div>');   
+        }
         if (todo[2])
             document.getElementById("note" + i).style.textDecoration = "line-through";
     };
@@ -25,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
 $(document).ready(function () {
 
     var noteCount = localStorage.length;
-    var activeNote = null;
 
     $('.color-box').click(function () {
         var color = $(this).css('background-color');
@@ -49,8 +54,10 @@ $(document).ready(function () {
             if (localStorage.key(i) >= id)
                 id = JSON.parse(localStorage.key(i)) + 1;
         };
-        if (body != null)
+        if (!isNaN(body))
             $('#listed').append('<div id="note' + id + '" style="background-color: ' + color + '"><div class="list-title">' + title + '<button class="trash-button" onclick="deleteTodo(this.parentElement.parentElement)"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + body.toLocaleString("en-US") + '</div> </div>');
+        else
+            $('#listed').append('<div id="note' + id + '" style="background-color: ' + color + '"><div class="list-title">' + title + '<button class="trash-button" onclick="deleteTodo(this.parentElement.parentElement)"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "No due date" + '</div> </div>');
         noteCount++;
         var checked = 0;
         var todo = [title, body, checked, color];
