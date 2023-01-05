@@ -35,6 +35,8 @@ Step 7: Open a web browser and type "localhost/Programming-Integration-Project-m
 
 Just run Todo.html in the TodoApp folder on localhost and you're good to go.
 
+DEMO VIDEO: https://drive.google.com/file/d/1TvpPmLTSFFYmTYdSZ62pdVX2CJKKJuAZ/view?usp=sharing
+
 *Running on localhost With Python guide:
 
 Open command prompt
