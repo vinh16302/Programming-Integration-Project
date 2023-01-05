@@ -16,7 +16,7 @@ Step 2: Download this repository and extract.
 
 Step 3: Open a web browser and type "localhost/phpmyadmin".
 
-step 4: Open our db.sql file and copy all.
+step 4: Open our db.sql file and copy all (Programming-Integration-Project-Main/NoteApp/db.sql).
 
 step 5: Patse in the console of "localhost/phpmyadmin", press "ctrl + enter" to execute code.
 
