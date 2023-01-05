@@ -49,7 +49,8 @@ $(document).ready(function () {
             if (localStorage.key(i) >= id)
                 id = JSON.parse(localStorage.key(i)) + 1;
         };
-        $('#listed').append('<div id="note' + id + '" style="background-color: ' + color + '"><div class="list-title">' + title + '<button class="trash-button" onclick="deleteTodo()"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + body.toLocaleString("en-US") + '</div> </div>');
+        if (body != null)
+            $('#listed').append('<div id="note' + id + '" style="background-color: ' + color + '"><div class="list-title">' + title + '<button class="trash-button" onclick="deleteTodo(this.parentElement.parentElement)"><i class="fa-solid fa-trash"></i></button>' + '</div> <div class="list-text">' + "Due at: " + body.toLocaleString("en-US") + '</div> </div>');
         noteCount++;
         var checked = 0;
         var todo = [title, body, checked, color];
